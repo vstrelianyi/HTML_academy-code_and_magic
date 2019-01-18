@@ -40,22 +40,22 @@ setupClose.addEventListener( 'keydown', function(e){
   }
 });
 
-// ÑÐ¿Ð¸ÑÐ¾Ðº Ð¿Ð¾ÑÐ¾Ð¶Ð¸Ñ Ð¿ÐµÑÑÐ¾Ð½Ð°Ð¶ÐµÐ¹
+// список похожих персонажей
 var wizards = [
   {
-    name : 'ÐÐµÐ½Ð´Ð¾Ð»ÑÑ' ,
+    name : 'Пендольф' ,
     coatColor : 'red'
   },
   {
-    name : 'ÐÐ°ÑÐ¸Ð¾' ,
+    name : 'Марио' ,
     coatColor : 'yellow'
   },
   {
-    name : 'Ð¨Ð°Ð¾ ÐÐ°Ð½' ,
+    name : 'Шао Кан' ,
     coatColor : 'green'
   },
   {
-    name : 'ÐÐ°Ð±Ð° Ð¯Ð³Ð°' ,
+    name : 'Баба Яга' ,
     coatColor : 'blue'
   }
 ];
@@ -74,12 +74,12 @@ for( var i =0; i< wizards.length ; i++){
 var userNameInput = setup.querySelector('.setup-user-name');
 userNameInput.addEventListener('invalid', function(e){
   if(userNameInput.validity.tooShort){
-    userNameInput.setCustomValidity('ÐÐ¼Ñ Ð´Ð¾Ð»Ð¶Ð½Ð¾ ÑÐ¾ÑÑÐ¾ÑÑÑ Ð¼Ð¸Ð½Ð¸Ð¼ÑÐ¼ Ð¸Ð· 2-Ñ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð²');
+    userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
   }
   else if( userNameInput.validity.tooLong){
-    userNameInput.setCustomValidity('ÐÐ¼Ñ Ð½Ðµ Ð´Ð¾Ð»Ð¶Ð½Ð¾ Ð¿ÑÐµÐ²ÑÑÐ°ÑÑ 25-ÑÐ¸ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð²');
+    userNameInput.setCustomValidity('Имя не должно превышать 25-ти символов');
   }
   else if( userNameInput.validity.valueMissing){
-    userNameInput.setCustomValidity('ÐÐ±ÑÐ·Ð°ÑÐµÐ»ÑÐ½Ð¾Ðµ Ð¿Ð¾Ð»Ðµ');
+    userNameInput.setCustomValidity('Обязательное поле');
   }
 });

@@ -260,7 +260,7 @@ input[type=radio]:checked + .reviews-filter-item {
 }
 
 .reviews-list-loading:after {
-  content: "ÐÐ°Ð³ÑÑÐ·ÐºÐ°...";
+  content: "Загрузка...";
 }
 
 .reviews-load-failure:after {

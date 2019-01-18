@@ -16,7 +16,7 @@ window.renderStatistics = function(ctx, players){
   renderCloud(ctx, 100, 60, '#fff');
 
   // ctx.fillStyle = '#000';
-  // ctx.fillText('ÐÑ', 100, 75);
+  // ctx.fillText('Вы', 100, 75);
   // ctx.fillRect(110, 60, 480,20);
 }
 
