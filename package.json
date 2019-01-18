@@ -8,13 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/codesandbox-app/static-template.git"
+    "url": "git+https://github.com/vstrelianyi/HTML_academy-code_and_magic.git"
   },
   "keywords": [],
   "author": "Ives van Hoorne",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/codesandbox-app/static-template/issues"
+    "url": "https://github.com/vstrelianyi/HTML_academy-code_and_magic/issues"
   },
-  "homepage": "https://github.com/codesandbox-app/static-template#readme"
+  "homepage": "https://github.com/vstrelianyi/HTML_academy-code_and_magic#readme"
 }
