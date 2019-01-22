@@ -1,92 +1,68 @@
 'use strict';
 
 (function(){
-  window.renderStatistics = function(ctx, names, times){
 
-    var dataCloud = {
-      startX: 100,
-      startY: 10,
-      widthRect: 420,
-      heightRect: 270,
-      lenghtShadow: 10,
-      margin: 40,
+  var CLOUD_WIDTH = 500;
+  var CLOUD_HEIGHT = 200;
+  var CLOUD_X = 100;
+  var CLOUD_Y = 50;
+  var GAP = 10;
+  var FONT_GAP = 15;
+  var TEXT_WIDTH = 50;
+  var BAR_HEIGHT = 20;
+  var barWidth = CLOUD_WIDTH - GAP - TEXT_WIDTH - GAP;
+  var text = ['Ура вы победили!', 'Список результатов: '];
 
-      colorRect: ['rgba(0, 0, 0, 0.7)', 'rgb(256, 256, 256)'],
-      text: ['Ура вы победили!', 'Список результатов: ']
-    };
+  // Выводим надпись на облаке
+  var renderCloudHeading = function( ctxObject, textArray) {
+    ctxObject.fillStyle = '#000';
+    ctxObject.font = '16px PT Mono';
+    for (var i = 0; i < textArray.length; i++) {
+      ctxObject.fillText(textArray[i], CLOUD_X + FONT_GAP, CLOUD_Y + (i + 1) * 25);
+    }
+  };
 
-    drawRect(dataCloud.startX + dataCloud.lenghtShadow, dataCloud.startY + dataCloud.lenghtShadow, dataCloud.widthRect, dataCloud.heightRect, dataCloud.colorRect[0]);
-    drawRect(dataCloud.startX, dataCloud.startY, dataCloud.widthRect, dataCloud.heightRect, dataCloud.colorRect[1]);
-    writeText(dataCloud.text);
-    drawHistogram(times, names);
+  var renderCloud = function(ctx, x, y, color) {
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
+  };
 
-    // Рисуем прямоугольник
-    function drawRect(axisX, axisY, width, height, fillColor) {
-      ctx.fillStyle = fillColor;
-      ctx.fillRect(axisX, axisY, width, height);
-    };
+  var getMaxElement = function(arr) {
+    var maxElement = arr[0];
 
-    // Выводим надпись на облаке
-    function writeText(textArray) {
-      ctx.fillStyle = '#000';
-      ctx.font = '16px PT Mono';
-
-      for (var i = 0; i < textArray.length; i++) {
-        ctx.fillText(textArray[i], dataCloud.startX + dataCloud.margin, dataCloud.startY + (i + 1) * 25);
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] > maxElement) {
+        maxElement = arr[i];
       }
-    };
+    }
 
-    // Рисуем гистограмму
-    function drawHistogram(arrayTimes, arrayNames) {
+    return maxElement;
+  };
 
-      var dataHistogram = {
-        barWidth: 40,
-        indent: 90,
-        indentName: 20,
-        indentTime: 10,
-        histogramHeight: 150,
-        paddingTop: 60,
-      };
+  // Вычисляем цвет бара в зависимости от имени игрока
+  var generateFullBarColor  = function(namePlayer) {
+    console.log( namePlayer );
+    var randomOpacity = Math.random().toFixed(2);
+    if (namePlayer === 'Вы') {
+      return 'rgba(255, 0, 0, 1)';
+    }
+    return 'rgba(0, 0, 255, ' + randomOpacity + ')';
+  };
 
-      var step = dataHistogram.histogramHeight / (getMaxValue( arrayTimes ) - 0);
-      var initialX = dataCloud.startX + dataCloud.margin;
-      var initialY = dataCloud.startY + dataHistogram.histogramHeight + dataHistogram.indentName + dataHistogram.indentTime + dataHistogram.paddingTop;
+  window.renderStatistics = function(ctx, players, times) {
+    // render cloud shadow
+    renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.3)');
+    // render cloud
+    renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
 
-      for (var i = 0; i < arrayTimes.length; i++) {
-        dataHistogram.barHeight = arrayTimes[i] * step;
-        var getY = initialY - arrayTimes[i] * step;
-        var getX = initialX + dataHistogram.indent * i;
+    renderCloudHeading(ctx, text);
 
-        ctx.fillStyle = generateFillBarColor(names[i]);
-        ctx.fillRect(getX, getY, dataHistogram.barWidth, dataHistogram.barHeight);
+    var maxTime = getMaxElement(times);
 
-        ctx.fillText(arrayNames[i], getX, initialY + dataHistogram.indentName);
-        ctx.fillText(arrayTimes[i].toFixed(0), getX, getY - dataHistogram.indentTime);
-      }
-    };
-
-    // Вспомогательные функции
-    // Ищем наихудший результат
-    function getMaxValue(array) {
-      var max = -1;
-      for (var i = 0; i < array.length; i++) {
-        var value = array[i];
-        if (value > max) {
-          max = value;
-        }
-      }
-      return max;
-    };
-
-    // Вычисляем цвет бара в зависимости от имени игрока
-    function generateFillBarColor(namePlayer) {
-      var randomOpacity = Math.random().toFixed(2);
-      if (namePlayer === 'Вы') {
-        ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-      } else {
-        ctx.fillStyle = 'rgba(0, 0, 255, ' + randomOpacity + ')';
-      }
-    };
-
+    for (var i = 0; i < players.length; i++) {
+      ctx.fillStyle = generateFullBarColor( players[i] );
+      ctx.fillText(players[i], CLOUD_X + GAP, 60 + CLOUD_Y + GAP + FONT_GAP + (GAP + BAR_HEIGHT) * i);
+      ctx.fillRect(CLOUD_X + GAP + TEXT_WIDTH, CLOUD_Y + GAP + (GAP + BAR_HEIGHT) * i + 60, (barWidth * times[i]) / maxTime, BAR_HEIGHT);
+    }
   };
 })();
