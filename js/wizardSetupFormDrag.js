@@ -44,7 +44,7 @@
       if (dragged) {
         var onClickPreventDefault = function (evt) {
           evt.preventDefault();
-          dialogHandler.removeEventListener('click', onClickPreventDefault)
+          dialogHandler.removeEventListener('click', onClickPreventDefault );
         };
         dialogHandler.addEventListener('click', onClickPreventDefault);
       }

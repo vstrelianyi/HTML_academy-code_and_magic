@@ -43,33 +43,4 @@
     }
   });
 
-  // Form validation
-  var userNameInput = setup.querySelector('.setup-user-name');
-  userNameInput.addEventListener('invalid', function(e){
-    if(userNameInput.validity.tooShort){
-      userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
-    }
-    else if( userNameInput.validity.tooLong){
-      userNameInput.setCustomValidity('Имя не должно превышать 25-ти символов');
-    }
-    else if( userNameInput.validity.valueMissing){
-      userNameInput.setCustomValidity('Обязательное поле !!!');
-    }
-  });
-
-  // Form sending
-  var userDialog = document.querySelector('.setup');
-  var form = userDialog.querySelector('.setup-wizard-form');
-
-  form.addEventListener('submit', function(evt){
-    evt.preventDefault();
-
-    window.upload( new FormData(form), function(response){
-      userDialog.classList.add('hidden');
-      // console.log( response );
-      alert("Form sent successfully \n" + JSON.stringify(response) );
-    });
-
-  });
-
 })();
