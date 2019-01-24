@@ -39,9 +39,9 @@
     window.renderSimilarWizardsList( window.createSimilarWizardsList(window.wizardsExternal) );
   };
 
-  setupWizardCoat.addEventListener( 'click', updateSimilarWizardsList );
-  setupWizardEyes.addEventListener( 'click', updateSimilarWizardsList );
-  setupWizardFireball.addEventListener( 'click', updateSimilarWizardsList );
+  setupWizardCoat.addEventListener( 'click', window.debounce( updateSimilarWizardsList , 500) );
+  setupWizardEyes.addEventListener( 'click', window.debounce(updateSimilarWizardsList, 500) );
+  setupWizardFireball.addEventListener( 'click', window.debounce( updateSimilarWizardsList, 500) );
 
 
 
