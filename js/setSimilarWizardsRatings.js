@@ -36,7 +36,7 @@
 
   window.sortWizardsByRating = function( array, sortKey, sortType){
 
-    var compareNumbersAsc = function(a, b){
+    var compareStringsAsc = function(a, b){
       if( a[sortKey] < b[sortKey] ){
         return 1 ;
       }
@@ -47,7 +47,7 @@
       return 0;
     };
 
-    var compareNumbersDesc = function(a, b){
+    var compareStringsDesc = function(a, b){
       if( a[sortKey] < b[sortKey] ){
         return -1 ;
       }
@@ -56,6 +56,14 @@
         return 1;
       }
       return 0;
+    };
+
+    var compareNumbersAsc = function(a, b){
+      return b[sortKey] - a[sortKey]; // in number is positive - no swap, negative -swap
+    };
+
+    var compareNumbersDesc = function(a, b){
+      return a[sortKey] - b[sortKey];
     };
 
     if( sortType == 'asc' ){
