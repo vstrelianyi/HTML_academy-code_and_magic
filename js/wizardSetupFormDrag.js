@@ -28,7 +28,7 @@
         y: moveEvt.clientY
       };
 
-      console.log( startCoords.x , startCoords.y );
+      // console.log( startCoords.x , startCoords.y );
 
       setupDialogElement.style.top = (setupDialogElement.offsetTop - shift.y) + 'px';
       setupDialogElement.style.left = (setupDialogElement.offsetLeft - shift.x) + 'px';
