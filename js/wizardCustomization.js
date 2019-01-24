@@ -35,6 +35,14 @@
   setupWizardEyes.addEventListener( 'click', changeWizardEyesColor );
   setupWizardFireball.addEventListener( 'click', changeWizardFireballColor );
 
+  var updateSimilarWizardsList = function(){
+    window.renderSimilarWizardsList( window.createSimilarWizardsList(window.wizardsExternal) );
+  };
+
+  setupWizardCoat.addEventListener( 'click', updateSimilarWizardsList );
+  setupWizardEyes.addEventListener( 'click', updateSimilarWizardsList );
+  setupWizardFireball.addEventListener( 'click', updateSimilarWizardsList );
+
 
 
 })();
